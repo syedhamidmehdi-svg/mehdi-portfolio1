@@ -1,0 +1,296 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Syed Hamid Mehdi | Portfolio</title>
+
+    <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            Mehdi<span>.</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <p class="hello">Hello, I am</p>
+
+            <h1>
+                Syed Hamid <span>Mehdi</span>
+            </h1>
+
+            <h2>Computer Science Student & Web Developer</h2>
+
+            <p class="hero-description">
+                I am a passionate Computer Science student and aspiring
+                Full Stack Web Developer. I enjoy building modern,
+                responsive and user-friendly websites using technologies
+                like HTML, CSS, JavaScript, Python and Django.
+            </p>
+
+            <p class="hero-description">
+                My goal is to continuously improve my programming skills,
+                build real-world projects and create useful digital
+                solutions through technology.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#projects" class="btn primary-btn">
+                    View My Projects
+                </a>
+
+                <a href="#contact" class="btn secondary-btn">
+                    Contact Me
+                </a>
+            </div>
+
+        </div>
+
+
+        <!-- Profile Photo -->
+        <div class="hero-image">
+
+            <div class="image-circle">
+
+                <img
+                    src="{% static 'portfolio/images/profile.jpg' %}"
+                    alt="Syed Hamid Mehdi Profile Photo"
+                >
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- About Section -->
+
+    <section class="about" id="about">
+
+        <h2 class="section-title">About Me</h2>
+
+        <div class="about-box">
+
+            <p>
+                My name is <strong>Syed Hamid Mehdi</strong>. I am currently
+                pursuing a Diploma in Computer Science and Engineering.
+                I am passionate about technology, programming and web
+                development.
+            </p>
+
+            <p>
+                I am continuously learning new technologies and working
+                on practical projects to improve my skills. I believe
+                that building projects is one of the best ways to learn
+                programming and understand how real applications work.
+            </p>
+
+            <p>
+                My current focus is on Web Development, Python, Django,
+                JavaScript and building professional projects that can
+                solve real-world problems.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Skills Section -->
+
+    <section class="skills" id="skills">
+
+        <h2 class="section-title">My Skills</h2>
+
+        <div class="skills-grid">
+
+            <div class="skill-card">
+                <h3>HTML</h3>
+                <p>Building structured and semantic web pages.</p>
+            </div>
+
+            <div class="skill-card">
+                <h3>CSS</h3>
+                <p>Creating responsive and modern website designs.</p>
+            </div>
+
+            <div class="skill-card">
+                <h3>JavaScript</h3>
+                <p>Adding interactivity and functionality to websites.</p>
+            </div>
+
+            <div class="skill-card">
+                <h3>Python</h3>
+                <p>Learning programming and backend development.</p>
+            </div>
+
+            <div class="skill-card">
+                <h3>Django</h3>
+                <p>Building dynamic websites with backend and database.</p>
+            </div>
+
+            <div class="skill-card">
+                <h3>Git & GitHub</h3>
+                <p>Managing and publishing programming projects.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+<!-- Projects -->
+
+<section class="projects" id="projects">
+
+    <h2 class="section-title">My Projects</h2>
+
+    <div class="project-grid">
+
+        {% for project in projects %}
+
+        <div class="project-card">
+
+            <h3>{{ project.title }}</h3>
+
+            <p>
+                {{ project.description }}
+            </p>
+
+            <p class="technologies">
+                <strong>Technologies:</strong>
+                {{ project.technologies }}
+            </p>
+
+            <div class="project-buttons">
+
+                {% if project.live_link %}
+                    <a href="{{ project.live_link }}" target="_blank">
+                        Live Demo
+                    </a>
+                {% endif %}
+
+                {% if project.github_link %}
+                    <a href="{{ project.github_link }}" target="_blank">
+                        GitHub
+                    </a>
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <p class="no-project">
+            Projects will be added soon.
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+    <!-- Contact -->
+
+    <section class="contact" id="contact">
+
+        <h2 class="section-title">Contact Me</h2>
+
+        <div class="contact-box">
+
+            <p>
+                Have a project, idea or opportunity? Feel free to contact me.
+            </p>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                >
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                >
+
+                <textarea
+                    name="message"
+                    placeholder="Write your message..."
+                    rows="6"
+                ></textarea>
+
+                <button type="submit">
+                    Send Message
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <h3>Syed Hamid Mehdi</h3>
+
+        <p>
+            Computer Science Student | Web Developer | Learner
+        </p>
+
+        <p class="copyright">
+            © 2026 Syed Hamid Mehdi. All Rights Reserved.
+        </p>
+
+    </footer>
+<script>
+    const formInputs = document.querySelectorAll(
+        'input[name="name"], input[name="email"], textarea[name="message"]'
+    );
+
+    formInputs.forEach((input, index) => {
+        input.addEventListener("keydown", function(event) {
+
+            if (event.key === "Enter" && input.tagName !== "TEXTAREA") {
+                event.preventDefault();
+
+                if (index < formInputs.length - 1) {
+                    formInputs[index + 1].focus();
+                }
+            }
+        });
+    });
+</script>
+</body>
+
+</html>
